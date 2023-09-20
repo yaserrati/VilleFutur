@@ -1,0 +1,98 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "dimdate",
+						"type": "DatasetReference"
+					},
+					"name": "datesource"
+				},
+				{
+					"dataset": {
+						"referenceName": "dimregion",
+						"type": "DatasetReference"
+					},
+					"name": "regionsource"
+				},
+				{
+					"dataset": {
+						"referenceName": "weathermetrics",
+						"type": "DatasetReference"
+					},
+					"name": "weathermetricssource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "dimDateCleaned",
+						"type": "DatasetReference"
+					},
+					"name": "dateclean"
+				},
+				{
+					"dataset": {
+						"referenceName": "regionDimCleaned",
+						"type": "DatasetReference"
+					},
+					"name": "regionclean"
+				},
+				{
+					"dataset": {
+						"referenceName": "weathermetricscleaned",
+						"type": "DatasetReference"
+					},
+					"name": "weathermetricsclean"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          DateID as integer,",
+				"          Date as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> datesource",
+				"source(output(",
+				"          RegionID as integer,",
+				"          RegionName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> regionsource",
+				"source(output(",
+				"          DateID as integer,",
+				"          RegionID as integer,",
+				"          AverageTemperature as integer,",
+				"          Humidity as integer,",
+				"          WindSpeed as integer,",
+				"          Rainfall as integer,",
+				"          SunshineHours as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> weathermetricssource",
+				"datesource sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['dateclean'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> dateclean",
+				"regionsource sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['regionDimCleaned'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> regionclean",
+				"weathermetricssource sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['weathermetricscleaned'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> weathermetricsclean"
+			]
+		}
+	}
+}

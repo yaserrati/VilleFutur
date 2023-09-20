@@ -1,0 +1,24 @@
+{
+	"name": "regionDimCleaned",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "bs2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "regionDimCleaned.csv",
+				"container": "outputclean"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

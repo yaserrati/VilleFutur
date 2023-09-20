@@ -1,0 +1,24 @@
+{
+	"name": "weathermetricscleaned",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "bs3",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "weathermetricscleaned.csv",
+				"container": "outputclean"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

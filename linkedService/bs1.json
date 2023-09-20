@@ -1,0 +1,12 @@
+{
+	"name": "bs1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=yassineharrati;EndpointSuffix=core.windows.net;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDU2ODREQzg3LTk5OTgtNDNDOC05RUQzLUU3NDcwMjQ5QjEyNl81YjAzNzg1MS02OGRhLTRhYWItYmY5NC05ODQ0ZDljYTlmODIiDQp9"
+		}
+	}
+}
