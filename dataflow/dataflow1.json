@@ -6,14 +6,14 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "dimdate",
+						"referenceName": "dateDim",
 						"type": "DatasetReference"
 					},
 					"name": "datesource"
 				},
 				{
 					"dataset": {
-						"referenceName": "dimregion",
+						"referenceName": "regionDim",
 						"type": "DatasetReference"
 					},
 					"name": "regionsource"
@@ -29,21 +29,21 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "dimDateCleaned",
+						"referenceName": "output",
 						"type": "DatasetReference"
 					},
 					"name": "dateclean"
 				},
 				{
 					"dataset": {
-						"referenceName": "regionDimCleaned",
+						"referenceName": "output",
 						"type": "DatasetReference"
 					},
 					"name": "regionclean"
 				},
 				{
 					"dataset": {
-						"referenceName": "weathermetricscleaned",
+						"referenceName": "output",
 						"type": "DatasetReference"
 					},
 					"name": "weathermetricsclean"
@@ -52,34 +52,34 @@
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          DateID as integer,",
-				"          Date as date",
+				"          DateID as string,",
+				"          Date as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> datesource",
 				"source(output(",
-				"          RegionID as integer,",
+				"          RegionID as string,",
 				"          RegionName as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> regionsource",
 				"source(output(",
-				"          DateID as integer,",
-				"          RegionID as integer,",
-				"          AverageTemperature as integer,",
-				"          Humidity as integer,",
-				"          WindSpeed as integer,",
-				"          Rainfall as integer,",
-				"          SunshineHours as integer",
+				"          DateID as string,",
+				"          RegionID as string,",
+				"          AverageTemperature as string,",
+				"          Humidity as string,",
+				"          WindSpeed as string,",
+				"          Rainfall as string,",
+				"          SunshineHours as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> weathermetricssource",
 				"datesource sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['dateclean'],",
+				"     partitionFileNames:['dateDimCleaned'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> dateclean",
 				"regionsource sink(allowSchemaDrift: true,",
@@ -89,7 +89,7 @@
 				"     skipDuplicateMapOutputs: true) ~> regionclean",
 				"weathermetricssource sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['weathermetricscleaned'],",
+				"     partitionFileNames:['weathermetricsCleaned'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> weathermetricsclean"
 			]
