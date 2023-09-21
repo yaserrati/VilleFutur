@@ -28,23 +28,23 @@
 			],
 			"sinks": [
 				{
-					"dataset": {
-						"referenceName": "output",
-						"type": "DatasetReference"
+					"linkedService": {
+						"referenceName": "yassineharratiAzureDB",
+						"type": "LinkedServiceReference"
 					},
 					"name": "dateclean"
 				},
 				{
-					"dataset": {
-						"referenceName": "output",
-						"type": "DatasetReference"
+					"linkedService": {
+						"referenceName": "yassineharratiAzureDB",
+						"type": "LinkedServiceReference"
 					},
 					"name": "regionclean"
 				},
 				{
-					"dataset": {
-						"referenceName": "output",
-						"type": "DatasetReference"
+					"linkedService": {
+						"referenceName": "yassineharratiAzureDB",
+						"type": "LinkedServiceReference"
 					},
 					"name": "weathermetricsclean"
 				}
@@ -79,19 +79,43 @@
 				"     ignoreNoFilesFound: false) ~> weathermetricssource",
 				"datesource sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['dateDimCleaned'],",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'dbo',",
+				"     tableName: 'dateDim',",
+				"     insertable: true,",
+				"     updateable: false,",
+				"     deletable: false,",
+				"     upsertable: false,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> dateclean",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> dateclean",
 				"regionsource sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['regionDimCleaned'],",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'dbo',",
+				"     tableName: 'regionDim',",
+				"     insertable: true,",
+				"     updateable: false,",
+				"     deletable: false,",
+				"     upsertable: false,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> regionclean",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> regionclean",
 				"weathermetricssource sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['weathermetricsCleaned'],",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'dbo',",
+				"     tableName: 'Wheathermetrics',",
+				"     insertable: true,",
+				"     updateable: false,",
+				"     deletable: false,",
+				"     upsertable: false,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> weathermetricsclean"
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> weathermetricsclean"
 			]
 		}
 	}
