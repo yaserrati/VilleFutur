@@ -59,7 +59,7 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> datesource",
 				"source(output(",
-				"          RegionID as string,",
+				"          RegionID as integer,",
 				"          RegionName as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
